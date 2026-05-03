@@ -54,3 +54,4 @@ export const usePagination = ({
     canPrevPage: safePage > 1,
   };
   };
+  export default usePagination;
