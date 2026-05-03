@@ -23,6 +23,7 @@ export const PaginationDemo = () => {
 
     return (
           <div style={{ padding: 20 }}>
+            <h2> Pagination Demo </h2>
 
       {/* Top navigation */}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -43,9 +44,9 @@ export const PaginationDemo = () => {
       </div>
 
       {/* PAGE INFO */}
-      <h3>
+      <h4>
         Pages {currentPage} of {totalPages}
-      </h3>
+      </h4>
 
       {/* INPUT + STEP CONTROL */}
       <div>

@@ -8,7 +8,8 @@ export const DebounceSearchDemo = () => {
     const debouncedValue = useDebounce(input, 500);
 
     useEffect(() => {
-        if (debouncedValue) {
+        console.log("Debounced:", debouncedValue);
+       if (!debouncedValue.trim()) {
             console.log("Searching for:", debouncedValue);
             setResults([]);
             return;
