@@ -1,52 +1,59 @@
 import { useState } from 'react';
 
 interface UsePaginationProps {
-  totalItems: number;
-  itemsPerPage?: number;
-  initialPage?: number;
+    totalItems: number;
+    itemsPerPage?: number;
+    initialPage?: number;
 }
 
 export const usePagination = ({
-  totalItems,
-  itemsPerPage = 10,
-  initialPage = 1,
-}:  UsePaginationProps) => {
+    totalItems,
+    itemsPerPage = 10,
+    initialPage = 1,
+}: UsePaginationProps) => {
+    const [currentPage, setCurrentPage] = useState(initialPage);
 
-      const totalPages = Math.ceil(totalItems / itemsPerPage);
-      const [currentPage, setCurrentPage] = useState(initialPage);
-        // Ensure currentPage stays within bounds
-  const safePage = Math.min(Math.max(currentPage, 1), totalPages);
-  const startIndex = (safePage - 1) * itemsPerPage;
-  const endIndex = Math.min(startIndex + itemsPerPage - 1, totalItems - 1);
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  const itemsOnCurrentPage = endIndex - startIndex + 1;
+    // Ensure currentPage stays within bounds
+    const safePage = Math.min(Math.max(currentPage, 1), totalPages);
 
-  const setPage = (pageNumber: number) => {
-    const page = Math.min(Math.max(pageNumber, 1), totalPages);
-    setCurrentPage(page);
-  };
-   const nextPage = () => {
-    if (safePage < totalPages) {
-      setCurrentPage(safePage + 1);
-    }
-  };
-   const prevPage = () => {
-    if (safePage > 1) {
-      setCurrentPage(safePage - 1);
-    }
-  };
+    const setPage = (page: number) => {
+        setCurrentPage(Math.min(Math.max(page, 1), totalPages));
+    };
 
-  return {
-    currentPage: safePage,
-    totalPages,
-    startIndex,
-    endIndex,
-    itemsOnCurrentPage,
-    setPage,
-    nextPage,
-    prevPage,
-    canNextPage: safePage < totalPages,
-    canPrevPage: safePage > 1,
-  };
-  };
-  export default usePagination;
+    const nextPage = () => {
+        setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+    };
+
+    const prevPage = () => {
+        setCurrentPage((prev) => Math.max(prev - 1, 1));
+    };
+
+    //   indexes
+    const startIndex = (safePage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, totalItems);
+
+    // UI helpers
+    const displayStart = totalItems === 0 ? 0 : startIndex + 1;
+    const displayEnd = endIndex;
+    const itemsOnCurrentPage = endIndex - startIndex;
+
+    return {
+        currentPage: safePage,
+        totalPages,
+        startIndex,
+        endIndex,
+        displayStart,
+        displayEnd,
+        itemsOnCurrentPage,
+
+
+        setPage,
+        nextPage,
+        prevPage,
+        canNextPage: safePage < totalPages,
+        canPrevPage: safePage > 1,
+    };
+};
+export default usePagination;
