@@ -10,11 +10,6 @@ export const usePagination = ({
   totalItems,
   itemsPerPage = 10,
   initialPage = 1,
-}: 
-export const usePagination = ({
-  totalItems,
-  itemsPerPage = 10,
-  initialPage = 1,
 }:  UsePaginationProps) => {
 
       const totalPages = Math.ceil(totalItems / itemsPerPage);
