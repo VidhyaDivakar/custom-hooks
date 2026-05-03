@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import { PaginationDemo } from './components/PaginationDemo';
 
 import heroImg from './assets/hero.png'
 import './App.css'
@@ -9,9 +9,9 @@ function App() {
 
   return (
     <>
-      
+      <PaginationDemo/>
     </>
   )
 }
 
-export default App
+export default App;
