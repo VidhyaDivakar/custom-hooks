@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { PaginationDemo } from './components/PaginationDemo';
+import { DebounceSearchDemo } from "./components/DebounceSearchDemo";
 
-import heroImg from './assets/hero.png'
 import './App.css'
 
 function App() {
@@ -9,7 +9,8 @@ function App() {
 
   return (
     <>
-      <PaginationDemo/>
+      <PaginationDemo />
+      <DebounceSearchDemo />
     </>
   )
 }
