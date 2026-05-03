@@ -10,7 +10,16 @@ export const DebounceSearchDemo = () => {
     useEffect(() => {
         if (debouncedValue) {
             console.log("Searching for:", debouncedValue);
+            setResults([]);
+            return;
         }
+
+        const fakeResults = Array.from({ length: 3 }, (_, i) => {
+            return `Result for "${debouncedValue}": Item ${i + 1}`;
+        });
+        console.log("Searching for:", debouncedValue);
+
+        setResults(fakeResults);
     }, [debouncedValue]);
 
     return (
@@ -25,7 +34,13 @@ export const DebounceSearchDemo = () => {
             />
 
             <p>Current Value: {input}</p>
-            <p>Debounced Value: {debouncedValue}</p>
+            <p>Debounced Value (after 500ms): {debouncedValue}</p>
+            <p>Simulated Search Results:</p>
+            <ul>
+                {results.map((item, index) => (
+                    <li key={index}>{item}</li>
+                ))}
+            </ul>
         </div>
     );
 };
